@@ -309,30 +309,31 @@ while (clientRoom < maxRooms) {
   console.log(clientRoom);
   clientRoom += 1;
 }
-// Ex3
-function calculateTotal(number) {
-  let sum = 0; 
-  let i = 1;
-  while (i <= number) {
-    sum += i;
+// Ex3 Функція calculateSum(number) приймає ціле число (параметр number). Доповни код функції так, щоб вона повертала суму всіх цілих чисел від одиниці до цього числа включно. Наприклад, якщо number дорівнює 3, то сума - це 1 + 2 + 3, тобто 6.
+function calculateSum(number) {
+  let counter = 0;
+  let total = 0;
+  while (counter <= number) {
+total += counter;
+counter++;
   }
- return sum;
+  return total;
 }
+const pf = calculateSum(3);
+console.log(pf);
 
-const op = calculateTotal(18);
-console.log(op);
 
 // Цикл do…while - відмінність від while - код у тілі циклу виконується принаймні один раз, навіть якщо умова не виконується з самого початку. Блок коду всередині do виконується в перший раз незалежно від виконання умови, потім після кожної ітерації, перевіряється умова. Якщо умова оцінюється як true, цикл продовжує виконуватися; якщо — як false, цикл завершується.
-do {
-  statement // код, який буде виконуватися
-} while (condition);
+// do {
+//   statement // код, який буде виконуватися
+// } while (condition);
 
-let numb = 0;
+// let numb = 0;
 
-do {
-	console.log(`Numb: ${numb}`);
-	numb += 1;
-} while (numb < 5);
+// do {
+// 	console.log(`Numb: ${numb}`);
+// 	numb += 1;
+// } while (numb < 5);
 
 // Цикл for на відміну від циклів while і do…while -  має змінну-лічильник. Змінна-лічильник оголошується за допомогою ключового слова let (const видасть помилку). На кожній ітерації після виконання коду з тіла циклу вона змінює своє значення від заданого початкового до кінцевого з певним кроком. Синтаксис циклу for: 
 // for (initialization; condition; afterthought) {
@@ -345,9 +346,119 @@ do {
 //   console.log(i);
 // }
 // У наведеному прикладі циклу for змінна i ініціалізується значенням 0. Цикл виконується доти, доки i менша або дорівнює 20. Після кожної ітерації значення i збільшується на 5. У результаті в консоль будуть виведені числа 0, 5, 10, 15 і 20.
+// Example calculateTotal(number) приймає ціле число (параметр number) Використовуючи цикл for, доповни код функції так, щоб вона повертала суму всіх цілих чисел від одиниці до цього числа включно. Наприклад, якщо number дорівнює 3, то сума - це 1 + 2 + 3, тобто 6.
+function calculateTotal(number) {
+  let sum = 0;
+  for (let i = 1; i <= number; i+=1) {
+sum += i;
+  }
+  return sum;
+}
+const yeh = calculateTotal(3);
+console.log(yeh);
+// EXAMPLE CYCLE FOR - функція рахує суму(тотал) чисел що кратні 2(діляться націло на 2) і знаходять в діапазоні від мін до мах 
+function Calc(min, max) {
+  let total = 0;
+  for (let i = min; i <= max; i++) {
+if (i % 2 === 0) {
+  total += i;
+}
+  }
+return total;
+}
 
+let ghhg = Calc(0, 5); 
+console.log("OMG it's total!",ghhg);
 
+// Виводимо НЕПАРНІ ЧИСЛА за допомогою  логічного заперечення ! та нічого з ними не робимо а через оператор контінью просто продовжуємо ітерацію циклю таким чином ми будемо збільшувати непарні числа на крок 1 і матимемо ПАРНІ ЧИСЛА. після завершення циклу рахуємо суму 
+function Calc2(min, max) {
+  let total = 0;
+  for (let i = min; i <= max; i++) {
+if (i % 2 !== 0) {
+ continue;
+}
+console.log(i);
+total += i;
+  }
+ return total;
+}
 
+let pppp = Calc2(0, 5); 
+console.log("OMG these're numbers!", pppp);
 
+// EXAMPLE виводимо індекси символів із рядка за допомогою цикла FOR
+function strJust(justString) {
+  for (let i=0; i < justString.length; i++) {
+     console.log(justString[i], i);
+   }
 
+}
+const justSymbolsOfString = strJust("You are the better version yourself today");
 
+// // 
+// function calculateEvenTotal(number) {
+//   let sum = 0;
+//   let count = 1;
+//   for (let i = 1; i <= number; i += 1) {
+//     count++;
+//     if (count % 2 === 0) {
+//       sum += count;
+//     }
+//   }
+//   return sum;
+// }
+// const www = calculateEvenTotal(18);
+// console.log(www);
+  function communication(client, status, age) {
+    let speech;
+    if (status = "smokes cigarettes" && age >= 18) {
+    switch (client) {
+      case "premium":
+        return speech = "В наявності Marlboro Tach у чорному дизайні та новому форматі у 6 та 4 мг за ціною 100 грн. Продукти мають фільтр з повітряною камерою та ущільненою стінкою.";
+      case "medium" && "capsuls":
+        return speech = "У L&M та Chesterfield з'явились новинки з капсулами за ціною 85 та 87 грн, вони мають фільтр з повітряною камерою та коричневу обгортку з відновленого тютюну.";
+      case "Philip Morris" && !"capsuls":
+        return speech = "У травні 2024 року компанія Філіп Морріс відновила власне виробництво в Україні! Перші продукти з нової фабрики вже в продажу.";
+      default: 
+        return speech = "Проходьте опитування за QR-кодом та залишайтесь на зв'язку зі своїм брендом. За витрачений час ви отримаєте поповнення мобільного на 30 грн.";
+    }
+  } else {
+    return speech = "Гарного дня!";
+  }
+  }
+
+  // function communication(client, status, age) {
+  // let speech1 = "В наявності Marlboro Tach у чорному дизайні та новому форматі у 6 та 4 мг за ціною 100 грн. Продукти мають фільтр з повітряною камерою та ущільненою стінкою.";
+  // let speech2 = "У L&M та Chesterfield з'явились новинки з капсулами за ціною 85 та 87 грн, вони мають фільтр з повітряною камерою та коричневу обгортку з відновленого тютюну.";
+  // let speech3 = "У травні 2024 року компанія Філіп Морріс відновила власне виробництво в Україні! Перші продукти з нової фабрики вже в продажу.";
+  // let speech4 = "Проходьте опитування за QR-кодом та залишайтесь на зв'язку зі своїм брендом. За витрачений час ви отримаєте поповнення мобільного на 30 грн.";
+  // let speech5 = "Гарного дня!";
+  //  if (status = "smokes cigarettes" && age >= 18) {
+  //   switch (client) {
+  //     case "premium":
+  //       return speech1; 
+  //     case "medium" && "capsuls":
+  //       return speech2; 
+  //     case "Philip Morris" && !"capsuls":
+  //       return speech3;
+  //     default: 
+  //       return speech4;
+  //   }
+  // } else {
+  //   return speech5;
+  // }
+  // }
+
+// function friendlyTalk(opposition) {
+//   if (opposition = "Вже пробував Мальборо - мені не сподобалось") {
+//     return "А що саме вам не сподобалось? Це нові пропозиції від бренду в абсолютно новому форматі та дизайні, можливо саме вони вас зацікавлять"
+//   } else if (opposition = "Я вже пробував Мальборо Тач") {
+//     return "Дійсно, бренд має Тач у компактному форматі, проте наші новинки мають довшу сигарету, фільтр з повітряною камерою та новий дизайн. Єдине що залишається незмінним - це оригінальний тютюн Мальборо."
+//   } else if (opposition = "Що таке фільтр з повітряною камерою?") {
+//     return "Це фільтр, що складається з 3 частин: ацетатної, вугільної та повітряної камери. Конструкція фільтру забезпечує самк тютюну більш м'яким та збалансованим."
+//   } else if (opposition = "") {
+//     return ""
+//   } else if (opposition = "") {
+//     return ""
+//   }
+// }
