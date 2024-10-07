@@ -1,0 +1,46 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: rgba(0, 0, 0, 0.856);
+}
+a {
+    text-decoration: none;
+}
+ul, ol {
+    list-style-type: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+button { 
+    cursor: pointer;
+    font-family: inherit;
+}
+h1, h2, h3, h4, h5, h6, p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+input {
+    font-family: inherit;
+}
+.header {
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 0cqmax;
+    color: antiquewhite;
+    padding-bottom: 30px;
+}
+.span {
+    color: rgba(247, 39, 229, 0.637);
+}
+.picture-pac {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+}

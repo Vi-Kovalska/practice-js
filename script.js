@@ -573,7 +573,7 @@ for (let i = max; i >= min; i--) {
   if (i % 2 === 0) {
     console.log(i);
   } else {
-   "Nothing";
+"Nothing";
   } 
 }
 // ex7 знайшли суму всіх парних чисел у проміжку 
@@ -635,3 +635,100 @@ for (let i = start; i <= end; i++) {
   }
 }
 console.log(number);
+
+
+
+//                                                       MODUL 3. ARRAY (МАСИВ)
+// Масив — це впорядкована структура даних, яка використовується для зберігання колекції елементів. Масиви можуть містити елементи різних типів даних, таких як числа, рядки, булеві значення тощо. Для створення масиву в JavaScript використовується літерал масиву: квадратні дужки []. 
+// Щоб отримати доступ до значення елемента масиву, ми використовуємо синтаксис квадратних дужок:
+// arrayName[index]
+const planetss = ['Earth', 'Mars', 'Venus'];
+console.log(planetss[0]); // 'Earth'
+console.log(planetss[1]); // 'Mars'
+// Результат звернення до елемента масиву можна зберегти у змінну і використовувати його надалі.
+const planetsss = ['Earth', 'Mars', 'Venus'];
+const firstElement = planetsss[0];
+console.log(firstElement); // 'Earth'
+
+// Перевизначення значення елемента - Елементи масиву можна змінювати, звернувшись до них за індексом і присвоївши нове значення. 
+const planets = ['Earth', 'Mars', 'Venus', 'Uranus'];
+planets[0] = 'Jupiter';
+planets[2] = 'Neptune';
+console.log(planets); // ['Jupiter', 'Mars', 'Neptune', 'Uranus']
+// Довжина масиву -  кількість його елементів, зберігається у властивості length. Це динамічна величина, яка автоматично змінюється під час додавання або видалення елементів.
+const planets44 = ['Earth', 'Mars', 'Venus'];
+console.log(planets44.length); // 3
+// ex Функція приймає  параметр array - масив довільних значень.  щоб вона повертала новий масив з двох елементів: - перший елемент - це індекс останнього елементу у масиві array; - другий елемент - це значення останнього елементу у масиві array
+function getLastElementMeta(array) {
+  const newArray = [array.length - 1, array[array.length - 1]];
+  return newArray;
+}
+console.log(getLastElementMeta(["a", "b", "c", "d"]));
+// ex щоб вона повертала масив з двох елементів - першого і останнього елементів параметра array.
+function getExtremeElements(array) {
+  const newArray = [array[1], array[array.length -1]];
+  return newArray;
+}
+console.log(getExtremeElements(["strange", "wild", "wakcy", "freak"]));
+
+// METHOD масиву join(delimiter) об'єднує елементи масиву в рядок. У результуючому рядку елементи будуть розділені символом або групою символів, зазначених у delimiter.
+const words2 = ["JavaScript", "is", "amazing"];
+console.log(words2.join("")); // 'JavaScriptisamazing'
+console.log(words2.join(" ")); // 'JavaScript is amazing'
+console.log(words2.join("-")); // 'JavaScript-is-amazing'
+
+// METHOD Метод рядків split(delimiter) - перетворити рядок на масив, розбивши його за вказаним роздільником delimiter. Якщо роздільник є порожнім рядком (рядком, у якому нема символів), то вийде масив окремих символів рядка. 
+const name = "Mango";
+const letters = name.split(""); // ["M", "a", "n", "g", "o"]
+
+const message2 = "JavaScript essentials";
+const words = message2.split(" "); // ["JavaScript", "essentials"]
+
+const slug = "amazing*french*recipes";
+const slugParts = slug.split("*"); // ["amazing", "french", "recipes"]
+
+console.log(letters, words, slugParts);
+
+// Метод масиву slice(begin, end) повертає новий масив, що містить копію частини вихідного масиву, не змінюючи його. Копія створюється від індексу begin до, але не включаючи індекс end.
+const planets54 = ["Earth", "Mars", "Venus", "Jupiter", "Saturn"];
+planets54.slice(0, 2); // ['Earth', 'Mars']
+planets54.slice(0, 4); // ['Earth', 'Mars', 'Venus', 'Jupiter']
+planets54.slice(1, 3); // ['Mars', 'Venus']
+// Якщо не вказати параметри begin і end, буде створено повну копію вихідного масиву:
+const planets2 = ["Earth", "Mars", "Venus", "Jupiter", "Saturn"];
+planets2.slice(); // ["Earth", "Mars", "Venus", "Jupiter", "Saturn"]
+// Якщо не вказати end, копіювання відбуватиметься від begin до кінця масиву:
+const planets3 = ["Earth", "Mars", "Venus", "Jupiter", "Saturn"];
+planets3.slice(1); // ["Mars", "Venus", "Jupiter", "Saturn"]
+planets3.slice(2); // ["Venus", "Jupiter", "Saturn"]
+// Якщо значення begin негативне, а end не вказано, будуть скопійовані останні begin елементів (тобто стільки елементів з кінця, скільки вказано в параметрі begin):
+const planets4 = ["Earth", "Mars", "Venus", "Jupiter", "Saturn"];
+planets4.slice(-2); // ["Jupiter", "Saturn"]
+
+const fruits = ['apple', 'plum', 'pear', 'orange', 'banana'];
+// ex1 firstTwoEls - масив із перших двох елементів, nonExtremeEls - масив з усіх елементів, крім першого та останнього, lastThreeEls - масив із трьох останніх елементів:
+const firstTwoEls = fruits.slice(0,2);
+const nonExtremeEls = fruits.slice(1, fruits.length-1);
+const lastThreeEls =  fruits.slice(-3);
+
+// Метод concat(arr1, arr2, ..., arrN) - для об'єднання двох або більше масивів.
+
+let firstArray = ["Mercury", "Venus"];
+let secondArray = ["Mars", "Jupiter"];
+let result2 = firstArray.concat(secondArray); // ["Mercury", "Venus", "Mars", "Jupiter"];
+// Зверни увагу, що вихідні масиви firstArray і secondArray залишаються незмінними після виклику concat(). Метод concat() створює і повертає новий масив, що містить усі елементи об'єднаних масивів.
+// Порядок аргументів методу визначає порядок розташування елементів у новому масиві.
+ firstArray = ["Mercury", "Venus"];
+ secondArray = ["Mars", "Jupiter"];
+ let thirdArray = ["Saturn", "Neptune"];
+
+console.log(firstArray.concat(secondArray, thirdArray)); 
+// ['Mercury', 'Venus', 'Mars', 'Jupiter', 'Saturn', 'Neptune'];
+
+console.log(firstArray.concat(thirdArray, secondArray)); 
+// ['Mercury', 'Venus', 'Saturn', 'Neptune', 'Mars', 'Jupiter', ];
+
+// Метод масиву indexOf(elem) використовується для визначення індексу першого входження елемента elem у масиві. Він повертає індекс елемента, якщо він знайдений, або -1, якщо елемент не знайдений. Метод indexOf() виконує сувору рівність (===) при порівнянні елементів.
+const clients = ["Mango", "Ajax", "Poly", "Kiwi", "Poly"];
+console.log(clients.indexOf("Poly")); // 2
+console.log(clients.indexOf("Monkong")); // -1
