@@ -670,7 +670,7 @@ function getExtremeElements(array) {
   return newArray;
 }
 console.log(getExtremeElements(["strange", "wild", "wakcy", "freak"]));
-
+//                                      METHODS OF ARRAYS
 // METHOD масиву join(delimiter) об'єднує елементи масиву в рядок. У результуючому рядку елементи будуть розділені символом або групою символів, зазначених у delimiter.
 const words2 = ["JavaScript", "is", "amazing"];
 console.log(words2.join("")); // 'JavaScriptisamazing'
@@ -732,3 +732,108 @@ console.log(firstArray.concat(thirdArray, secondArray));
 const clients = ["Mango", "Ajax", "Poly", "Kiwi", "Poly"];
 console.log(clients.indexOf("Poly")); // 2
 console.log(clients.indexOf("Monkong")); // -1
+// ex Доповни код функції getSlice(array, value) так, щоб вона виконувала пошук значення value у масиві array і повертала: - порожній масив, якщо в array немає елемента зі значенням value; - підмасив, що починається з початку array і до елемента зі значенням value включно, якщо такий елемент є в array
+function getSlice(array, value) {
+  if (array.indexOf(value) === - 1) { 
+     const newArray = [];
+     return newArray;
+  } else {
+    const indexValue = array.indexOf(value) + 1;
+   const newArray = array.slice(0, indexValue);
+   return newArray;
+  }
+}
+console.log(getSlice(["You", "are", "a", "freak", "like", "everyone", "else"], "freak"));
+console.log(getSlice(["You", "are", "a", "freak", "like", "everyone", "else"], "uhh"));
+console.log(getSlice(["Mango", "Poly", "Ajax"], "Ajax"));
+
+
+// Метод масиву push() використовується для додавання одного або більше елементів у кінець масиву.
+ let planetsS = ["Earth", "Mars", "Venus"];
+planetsS.push("Jupiter");
+console.log(planetsS); // ['Earth', 'Mars', 'Venus', 'Jupiter']
+
+planetsS.push("Saturn", "Neptune");
+console.log(planetsS); // ['Earth', 'Mars', 'Venus', 'Jupiter', "Saturn", "Neptune"]
+// За допомогою циклу ми можемо виконувати повторювані операції і використовувати метод push для додавання нових елементів у масив на кожній ітерації. Це дуже корисно, коли нам потрібно створити масив з елементами, які можна динамічно додавати.
+const tags = [];
+for(let i = 0; i < 3; i += 1) {
+	tags.push(`tag-${i}`);
+}
+console.log(tags); // ["tag-0", "tag-1", "tag-2"]
+// ex щоб вона повертала масив усіх цілих чисел від значення min до max включно.
+function createArrayOfNumbers(min, max) {
+  let numbers = []; 
+  for (let i=min; i<=max; i+=1) {
+    numbers.push(i);
+  }
+  return numbers;
+}
+console.log(createArrayOfNumbers(1, 3));
+
+//  Ітерація по масиву з використанням циклу for дозволяє перебрати елементи масиву і виконати певну дію для кожного елемента. 
+const planets7 = ["Earth", "Mars", "Venus"];
+for (let i = 0; i < planets7.length; i += 1) {
+  console.log(planets7[i]);
+}
+// ex параметр order - масив чисел. Функція, щоб  поверта загальну суму елементів з масиву order.
+function calculateTotalPrice(order) {
+  let sum = 0;
+  for (let i= 0 ; i < order.length; i += 1) {
+    console.log(order[i]);
+  sum += order[i];
+  }
+  return sum;
+}
+console.log(calculateTotalPrice([15,20,15]));
+// ex Функція getEvenNumbers(start, end) має два параметри start та end, які є цілими числами. Доповни код функції так, щоб вона повертала масив усіх парних чисел від start до end. Якщо жодного парного числа немає, то масив має бути пустим. Парним вважається число, яке ділиться на 2 без остачі (10 % 2 === 0). Використовуй цикл for.
+// function getEvenNumbers2(start, end) {
+//   let arry = [];
+//   for (let i = start; i <= end; i += 1) {
+//     if (i % 2 === 0) {
+//       arry.push(i);
+//       console.log(arry);
+//     } else {
+//       arry = [];
+//     }
+//   return arry;
+// }
+// }
+// console.log(getEvenNumbers2(2, 10));
+
+// Метод масиву includes() використовується для перевірки наявності певного елемента в масиві. Він повертає логічне значення true, якщо елемент знайдено в масиві, і false, якщо елемент відсутній.
+const planetas = ["Earth", "Mars", "Venus"];
+
+console.log(planetas.includes("Earth")); // true
+console.log(planetas.includes("Mars")); // true
+console.log(planetas.includes("Venus")); // true
+console.log(planetas.includes("Jupiter")); // false
+// ex Функція checkStorage(storage, item) приймає два параметри: - storage - масив рядків, що описує доступні товари на складі; - item - рядок з назвою товара, наявність якого потрібно перевірити. Доповни код функції таким чином, щоб вона перевіряла, чи присутній такий товар в масиві storage і повертала: - рядок "<item> is available to order!", де item - це назва товара, якщо товар було знайдено; - рядок "Sorry! We are out of stock!", якщо такого товара немає в масиві/    Зроби так, щоб пошук за ім'ям товару був незалежний від регістру, тобто наприклад "plum" і "pLuM" мають бути знайдені у масиві ["apple", "plum", "pear"].
+// function checkStorage(storage, item) {
+//   const storageNorm = storage.toLowerCase;
+//   const itemNorm = item.toLowerCase;
+//   const message = storageNorm.includes(itemNorm) ? `${item} is available to order!` : 'Sorry! We are out of stock!';
+//   return message;
+// }
+
+// function checkStorage2(storage2List, itemm) {
+//   let storage2ListNorm = storage2List.toLowerCase;
+//   let itemmNorm = itemm.toLowerCase;
+//   const message = storage2ListNorm.includes(itemmNorm) ? `${itemmNorm} is available to order!` : 'Sorry! We are out of stock!';
+// return message;  
+// }
+  
+function checkStorage2(storage2List, itemm) {
+  let storage2ListNorm = storage2List.toLowerCase;
+  console.log(storage2ListNorm);
+  
+  let itemmNorm = itemm.toLowerCase;
+  if (storage2ListNorm.includes(itemmNorm)) {
+    return `${itemmNorm} is available to order!`;
+  }  else {
+  return 'Sorry! We are out of stock!';
+  }
+}
+console.log(checkStorage2(["a", "b", "c"], "C"));
+  console.log(checkStorage2(["a", "b", "c"], "t"));
+  // 
