@@ -823,17 +823,77 @@ console.log(planetas.includes("Jupiter")); // false
 // return message;  
 // }
   
-function checkStorage2(storage2List, itemm) {
-  let storage2ListNorm = storage2List.toLowerCase;
-  console.log(storage2ListNorm);
+// function checkStorage2(storage2List, itemm) {
+//   let storage2ListNorm = storage2List.toLowerCase;
+//   console.log(storage2ListNorm);
   
-  let itemmNorm = itemm.toLowerCase;
-  if (storage2ListNorm.includes(itemmNorm)) {
-    return `${itemmNorm} is available to order!`;
-  }  else {
-  return 'Sorry! We are out of stock!';
-  }
+//   let itemmNorm = itemm.toLowerCase;
+//   if (storage2ListNorm.includes(itemmNorm)) {
+//     return `${itemmNorm} is available to order!`;
+//   }  else {
+//   return 'Sorry! We are out of stock!';
+//   }
+// }
+// console.log(checkStorage2(["a", "b", "c"], "C"));
+//   console.log(checkStorage2(["a", "b", "c"], "t"));
+
+// Цикл for...of — це зручний спосіб перебору масиву. Тіло циклу буде виконуватися на кожному елементі масиву. Це гарна заміна циклу for, якщо не потрібен доступ до лічильника.Цикл for...of завжди перебирає масив від першого і до останнього елемента, задати умову припинення циклу не можна. Якщо необхідно закінчити виконання циклу передчасно, використовується оператор break.
+const planetsSS = ["Earth", "Mars", "Venus"];
+for (const planet of planetsSS) {
+  console.log(planet);
 }
-console.log(checkStorage2(["a", "b", "c"], "C"));
-  console.log(checkStorage2(["a", "b", "c"], "t"));
-  // 
+// ex функція, що поверта загальну суму чисел в масиві order. Використай цикл for...of для перебору масиву.
+function calculateTotalPrice21(order) {
+  let total = 0;
+  for  (const item of order) {
+    total += item;
+  }
+  return total;
+}
+console.log(calculateTotalPrice21([21, 44, 6, 78, 53]));
+
+
+// Псевдомасив arguments - Доступ до списку всіх аргументів можна отримати за допомогою спеціальної змінної arguments.  Змінна arguments автоматично створюється всередині функції під час виклику функції з аргументами і заповнюється переданими значеннями аргументів..
+// Ця колекція схожа на масив, але насправді є псевдомасивом, тобто: - у неї є деякі властивості масивів, наприклад length; - у неї є можливість звернутися до елемента за індексом; - у неї немає методів для роботи з масивом; - її можна перебирати за допомогою циклів.
+function multiply() {
+  let total = 1;
+  for (const arg of arguments) {
+    total *= arg;
+  }
+  return total;
+}
+console.log(multiply(1, 2, 3)); //  6
+console.log(multiply(1, 2, 3, 4)); //  24
+console.log(multiply(1, 2, 3, 4, 5)); //  120
+
+// метод Array.from(), який створить масив із псевдомасиву, якщо під час роботи з arguments потрібно використовувати методи масиву.
+function makeArrayofArguments() {
+  // У змінній args буде повноцінний масив з усіх аргументів
+  const args = Array.from(arguments);
+	return args.join("-");
+}
+console.log(makeArrayofArguments(1, 2, 3));// Поверне "1-2-3"
+
+//  метод масиву toReversed() - повертає новий масив з елементами у зворотньому порядку.
+// ex функція приймає довільну кількість аргументів і повертає масив усіх аргументів, які ідуть у зворотному порядку.
+function createReversedArray() {
+  const ars = Array.from(arguments);
+  return ars.toReversed();
+}
+console.log(createReversedArray("битися", "не можна", ",", "відступити"));
+
+
+// Параметри за замовчуванням - необов'язкові параметри. Ці значення використовуються в тому випадку, якщо функція викликається без передавання відповідного аргументу для цього параметра. Значенням за замовчуванням може бути будь-який тип даних.
+function greet(username = "Guest") {
+  console.log(`Hello, ${username}!`);
+}
+greet("Jacob"); // "Hello, Jacob!"
+greet();        // "Hello, Guest!"
+// ex amount - число, сума від якої потрібно обчислити податок (oбов'язковий параметр).taxRate - число, податкова ставка(nеобов'язковий параметр). За замовчуванням його значення має бути 0.2.функція повертає суму податку
+function calculateTax(amount, taxRate = 0.2) {
+  return amount * taxRate;
+}
+
+// 
+
+
