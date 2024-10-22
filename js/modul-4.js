@@ -173,7 +173,7 @@ console.log(user5.name); // "Henry Sibola"
 //                                                      ПЕРЕБІР ОБ*ЄКТА
 //                                               - Цикл for...in
 // На відміну від масиву або рядка, об'єкт — це не ітерабельна сутність, тобто його не можна перебрати циклами for або for...of.
-// Для перебирання об'єктів використовується спеціальний цикл for...in, який перебирає ключі об'єкта object.
+// Для перебирання об'єктів використовується спеціальний цикл for...in, який перебирає ключі об'єкта object. ВІн має свої побічності - наприклад перебирає ключі прототипа через це додають перевірки. 
 const book5 = {
   title: "The Last Kingdom",
   author: "Bernard Cornwell",
@@ -447,4 +447,479 @@ const atTheOldToad2 = {
     },
   };
   console.log(atTheOldToad2.getPotions());
+
+//   ex 
+const atTheOldToad21 = {
+    potions: [
+      { name: "Speed potion", price: 460 },
+      { name: "Stone skin", price: 520 },
+    ],
+    getPotions() {
+      return this.potions;
+    },
+    addPotion(newPotion) {
+     return this.potions.push(newPotion);
+    },
+    getTotalPrice() {
+      let totalPrice = 0;
+      for (const potion of this.potions) {
+        totalPrice += potion.price;
+      }
+      return totalPrice;
+    },
+  };
+  console.log(atTheOldToad21.addPotion( {e: "tt", u: "yi",}));
+  console.log(atTheOldToad21.potions);
   
+//                                            Масив об*єктів
+const bookShelf = {
+  books: [
+    { title: "The Last Kingdom", rating: 8 }, 
+    { title: "The Mist", rating: 6 }
+],
+getBooks() {
+return this.books;
+},
+addBook(newBook) {
+this.books.push(newBook);
+}
+};
+bookShelf.addBook({ title: "Dream Guardian", rating: 9 });
+// При переборі масиву у властивості books треба пам'ятати, що це масив об'єктів.
+
+// Наприклад, додамо метод getAverageRating(), який повертатиме середній рейтинг книг. Для цього:
+// - Оголосимо новий метод getAvarageRating в об'єкті.
+// -  Оголосимо змінну totalRating для зберігання загального рейтингу.
+// - Переберемо масив книг за посиланням this.books у циклі for...of.
+// - На кожній ітерації додамо до загального рейтингу - рейтинг книги.
+// - Після завершення циклу повернемо результат ділення загального рейтингу на кількість книг.
+const bookShelf2 = {
+    books: [
+      { title: "The Last Kingdom", rating: 8 },
+      { title: "The Mist", rating: 6 },
+      { title: "Dream Guardian", rating: 9 },
+    ],
+    getAvarageRating() {
+      let totalRating = 0;
+      for (const book of this.books) {
+        totalRating += book.rating;
+      }
+      return totalRating / this.books.length;
+    },
+  };
+  
+  bookShelf2.getAvarageRating(); // 7
+//   ex додали метод що поверта суму із властивості ціни
+const atTheOldToad23 = {
+    potions: [
+      { name: "Speed potion", price: 460 },
+      { name: "Stone skin", price: 520 },
+    ],
+    getPotions() {
+      return this.potions;
+    },
+    addPotion(newPotion) {
+      this.potions.push(newPotion);
+    },
+    getTotalPrice() {
+      let totalPrice = 0;
+      for ( const potion of this.potions) {
+        totalPrice += potion.price;
+      }
+      return totalPrice;
+    },
+  };
+
+//   Зміна об'єкта в масиві
+// Процес зміни властивостей об*єкта в масиві починається з таких кроків:
+// 1) Перебір масиву об'єктів у циклі, наприклад for...of.
+// 2) Додавання перевірки збігу значення властивості об'єкта на поточній ітерації і заданого значення.
+// 3) При виконанні if ми можемо бути впевнені, що на даній ітерації в змінній book знаходиться посилання на необхідний нам об'єкт, оскільки об'єкти передаються за посиланнями. Тепер достатньо звернутися до властивості цього об'єкта і прирівняти йому нове значення.
+const bookShelf24 = {
+    books: [
+      { title: "The Last Kingdom", rating: 8 },
+      { title: "The Mist", rating: 6 },
+    ],
+      changeRating(bookName, newRating) {
+          for(const book of this.books) {
+              if(book.title === bookName) {
+                  book.rating = newRating;
+              }
+          }
+      }
+  };
+  
+  bookShelf24.changeRating("The Mist", 9);
+  bookShelf24.changeRating("The Last Kingdom", 4);
+//   ex метод updatePotionName(oldName, newName) , щоб він оновлював назву зілля з oldName на newName в масиві зілля у властивості potions.
+const atTheOldToad25 = {
+    potions: [
+      { name: "Speed potion", price: 460 },
+      { name: "Stone skin", price: 520 },
+    ],
+    getPotions() {
+      return this.potions;
+    },
+    updatePotionName(oldName, newName) {
+      for (const potion of this.potions) {
+        if (oldName === potion.name) {
+          potion.name = newName;
+        }
+      }
+      return newName;
+    },
+  };
+
+//                                             Синтаксис spread і rest
+// Залишкові параметри
+// Ми вже знаємо, що викликати функцію можна з будь-якою кількістю аргументів незалежно від того, як її було визначено. Зайві аргументи не викличуть помилку.
+function multiply(a, b) {
+	console.log(a, b)
+}
+multiply(1, 2); // 1 2
+multiply(1, 2, 3); // 1 2
+multiply(1, 2, 3, 4); // 1 2
+// У прикладі вище проблема в тому, що аргументів більше, ніж параметрів. І будуть використані лише перші два аргументи — за кількістю оголошених параметрів. Ми вже вміємо розв'язувати такі завдання, використовуючи псевдомасив ------ arguments, у який збираються всі передані аргументи.
+function multiply() {
+	console.log(arguments)
+}
+multiply(1, 2); // псевдомасив [1, 2]
+multiply(1, 2, 3); // псевдомасив [1, 2, 3]
+multiply(1, 2, 3, 4); // псевдомасив [1, 2, 3, 4]
+
+// Починаючи зі стандарту ES6, з'явилася концепція залишкових параметрів (...rest). Cинтаксис (...rest). який дозволяє зібрати групу незалежних елементів у масив. Вільні параметри можуть бути позначені через три крапки .... Буквально це означає: "збери параметри, що залишилися, і поклади їх у масив". Ім'я параметра може бути довільним. Найчастіше його називають args або rest
+function multiply2(numb1, numb2,...args) {
+    console.log(args);
+  }
+  
+  multiply2(1, 2, 3, 4, 5 ); //[3, 4, 5]
+ 
+//   ex Використовуючи синтаксис залишкових параметрів, доповни код функції add() так, щоб вона приймала будь-яку кількість аргументів у параметр args і повертала їхню суму.
+function add(...args) {
+   let totalRest = 0;
+   for (const item of args) {
+    totalRest += item;
+   }
+    return totalRest;
+  }
+  
+ console.log( add(15, 27));
+ console.log( add(1, 2, 3));
+ 
+//  Функція addOverNum() приймає довільну кількість аргументів чисел.Доповни код функції таким чином, щоб вона обчислювала суму тільки тих аргументів, які більші за задане число. Це число завжди буде передано першим аргументом.
+ function addOverNum(first, ...args) {
+let total = 0;
+for (const item of args) {
+    if (item > first)
+        total += item;
+ }
+ return total;
+ }
+
+//  Входження параметрів
+// Інколи потрібно зробити протилежне — передати масив поелементно у функцію, яка викликається. Наприклад, є вбудована функція Math.max(), яка шукає та повертає найбільший з аргументів (чисел), тобто очікує не масив значень, а довільну кількість аргументів.
+// оператор розпилення ...spread - при використанні при виклику функції, він перетворює масив на список аргументів.
+const temps = [14, -4, 25, 8, 11];
+
+console.log(...temps); // 14 -4 25 8 11  набір окремих чисел 
+
+// ✅ Передамо колекцію елементів у якості окремих аргументів
+console.log(Math.max(...temps)); // 25
+
+// ex Функція getExtremeScores(scores) приймає масив оцінок (чисел) у параметрі scores; вона поверта об'єкт із двома властивостями:- best має містити найбільше число з масиву scores; - worst має містити найменше число з масиву scores Використовуй оператор (...spread) і методи Math.max() і Math.min().
+function getExtremeScores(scores) {
+    const best = Math.max(...scores);
+    const worst = Math.min(...scores);
+     const object = {
+      best,
+      worst,
+    };
+    return object;
+  }
+console.log(getExtremeScores([89, 64, 42, 17, 93, 51, 26]) );
+  
+//                      Створення копії масиву
+// Операція ...spread дозволяє створити копію масиву або «склеїти» довільну кількість масивів в один новий. Досі для цього використовувалися методи slice() і concat(), але операція розпилення дозволяє зробити те саме в коротшій формі.
+const arrayNumb = [14, -4, 25, 8, 11];
+// Це точна, але незалежна копія масиву temps
+const copyOfarrayNumb = [...arrayNumb];
+console.log(copyOfarrayNumb); // [14, -4, 25, 8, 11]
+
+//                      Склеювання 2х і більше масивів в один
+const array1 = [14, 25, 11];
+const array2 = [23, 17, 18];
+const commonArray = [...array1, ...array2];
+console.log(commonArray); // [14, 25, 11, 23, 17, 18]
+
+// ex 
+// У змінній allScores зберігався масив всіх результатів від першої до третьої групи включно.
+// У змінній bestScore був найвищий загальний бал.
+// У змінній worstScore був найнижчий загальний бал.
+const firstGroupScores = [64, 42, 93];
+const secondGroupScores = [89, 14, 51, 26];
+const thirdGroupScores = [29, 47, 18, 97, 81];
+
+const allScores = [...firstGroupScores, ...secondGroupScores, ...thirdGroupScores];
+const bestScore = Math.max(...allScores);
+const worstScore = Math.min(...allScores);
+//                                       Створення об'єкта
+// Операція spread дозволяє розпилити властивості довільної кількості об'єктів в один новий.
+let object1 = { A: 5, B: 10 };
+let object2 = { C: 15 };
+let object3 = { ...object1, ...object2 };
+console.log(object3); // { A: 5, B: 10, C: 15 }
+// Порядок розподілу має значення. Імена властивостей об'єкта — унікальні, тому властивості об'єкта, що розпиляються, можуть перезаписати значення вже існуючої властивості, якщо їх імена збігаються.
+ object1 = { A: 5, B: 10, C: 50 };
+ object2 = { C: 15, D: 20 };
+
+ object3 = { ...object1, ...object2 };
+console.log(object3); // { A: 5, B: 10, C: 15, D: 20 }
+
+let object4 = { ...object2, ...object1 };
+console.log(object4); // { A: 5, B: 10, C: 50, D: 20 }
+
+// Під час розпилення можна додавати властивості в довільне місце. Головне пам'ятати про унікальність імені властивості і про те, що її значення може бути перезаписане.
+const first = { propA: 5, propB: 10, propC: 50 };
+const second = { propC: 15 };
+
+const third = { propB: 20, ...first, ...second };
+console.log(third); // { propA: 5, propB: 10, propC: 15 }
+
+const fourth = { ...first, ...second, propB: 20 };
+console.log(fourth); // { propA: 5, propB: 20, propC: 15}
+
+// ex Виконано
+// В конструкторі можна створювати нові тести, для яких є налаштування за замовчуванням, які зберігаються у змінній defaultSettings. Під час створення тесту, усі або частину налаштувань можна перевизначити, користувацькі налаштування зберігаються у змінній overrideSettings.
+
+// Для того щоб отримати фінальні налаштування тесту, необхідно взяти налаштування за замовчуванням і поверх них застосувати перевизначені користувацькі налаштування. Доповни код таким чином, щоб у змінній finalSettings утворився об'єкт фінальних налаштувань тесту.
+const defaultSettings = {
+    theme: "light",
+    public: true,
+    withPassword: false,
+    minNumberOfQuestions: 10,
+    timePerQuestion: 60,
+  };
+  const overrideSettings = {
+    public: false,
+    withPassword: true,
+    timePerQuestion: 30,
+  };
+  
+  const finalSettings = {...defaultSettings, ...overrideSettings};
+console.log(finalSettings);
+
+// ex banking's APP - переписати таски ы виконати )
+// const trasactionType = {
+//     deposit: "deposit",
+//     withdraw: "withdraw",
+// };
+
+// const account = {
+// balance: 0,
+// transactions: [],
+// createTransaction(amount, type) {},
+// deposit (amount) {},
+// withdraw(amount) {},
+// getBalance() {},
+// getTransactionDetails(id) {},
+// getTransactionTypeTotal(type) {},
+
+// };
+
+//                                                       PRACTICE 
+// EX 1 функція створює і повертає масив за вказаною довжиною і наповнює вказаним значенням
+function createArrey(length, value) {
+    const arrayJust = [];
+    for (let i = 0; i < length; i++) {
+        arrayJust.push(value);
+    }
+    return arrayJust;
+}
+console.log(createArrey(3, "a"));
+
+// EX 2 функція що створ новий масив в якому не буде значень що приводяться до фалс
+function clearArray(...values) {
+    const clearArray = [];    
+    for (const value of values){
+// замість if (Boolean(value) === !false)
+        if (value) {
+            clearArray.push(value);
+        }
+    }
+    return clearArray;
+}
+console.log(clearArray(null, 1, undefined, 0, false, 3));
+
+// EX3 скрипт порівнює два масива і виводить результат тру якщо всі елементи однакові і фалс в ін випадку
+function arrayComparison(arr1, arr2) {
+    let message;
+    for (let i = 0; i < arr1.length; i++) {
+        // якщо порядок не важливий
+        if ((arr1.length === arr2.length) && (arr1.includes(arr2[i]))) {
+    //      ((arr1.length === arr2.length) && (arr1[i] === arr2[i])) якби порядок був важливий
+            message = true;
+        } else {
+            message = false;
+        }
+    }
+return message;
+}
+const arr11 = [1, 3, 2, 4];
+const arr21 = [1, 2, 3, 4];
+console.log(arrayComparison(arr11, arr21));
+// другий варіант щоб швидше працював 1 - порівнюєм довжини 2 - порівнюєм самі елементи
+function arrayComparison2(arr1, arr2) {
+    if (arr1.length !== arr2.length) {
+        return false;
+    }
+    for (const item of arr1) {
+        if (!arr2.includes(item)) {
+return false;
+        } else {
+            return true;
+        }
+    }
+}
+console.log(arrayComparison2(arr11, arr21));
+// EX 4 функцыя приймаэ довыльну к-ть аргументыв ы повертаэ ъх середнэ значення до того ж перевыряэ щоб це були числа
+function calculateAvarage(...rest) {
+    let total = 0;
+    let numbers = 0;
+for (const item of rest) {
+    if (typeof(item) === "number") {
+total += item;
+numbers +=1; 
+    }
+}
+const avarage = total / numbers;
+return `The avarage of arguments is ${avarage}`;
+}
+console.log(calculateAvarage(1, 2, "8", 3, true, "", 4, 5, 6, "what", 7));
+ 
+// EX 5
+const book7 = {
+    title: "To kill a Mockingbird",
+    author: "Harper Lee",
+    genre: "Southern gothic",
+    yearPublished: 1960,
+    isBestseller: true,
+};
+book7.rating = 4.8;
+book7.genre = "Classic fiction";
+book7.isBestseller = false;
+
+const keysOfBook7 = Object.keys(book7);
+for (const item of keysOfBook7) {
+    console.log(`${item} : ${book7[item]}`);
+    
+}
+
+// EX 6 функція приймає 2 парам - об*єкт і ключ , перебирає об*єкт і якщо він містить цей ключ то повертає тру в іншому випадку - фолс
+function checkKeyInObject(obj, key2) {
+    for (const key1 in obj) {
+        if (key1 === key2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+console.log(checkKeyInObject(book7, "Genre"));
+// EX 6 другий варіант 
+function checkKeyInObject2(obj, key) {
+ const check = Object.keys(obj).includes(key);
+ return check;
+}
+console.log(checkKeyInObject2(book7, "Genre"));
+
+// EX 7 add the method in the object
+const user6 = {
+name: "Peter",
+surname: "Parker",
+age: 27,
+potions: "spider-man",
+getInfo(){
+    const arr = [];
+    for(const key in this) {
+       arr.push(`${key}:${this[key]}`);
+    }
+    return arr.join(",");
+},
+}
+console.log(user6.getInfo());
+
+// EX 8                 
+const calculator = {
+    read(a, b){
+return (this.a = a) && (this.b = b);
+    },
+    sum() {
+        let total = 0;
+        const arrayOfValue = Object.values(this);
+        for (const value of arrayOfValue) {
+            if (typeof value === "number") {
+                 total += value;
+            }
+        }
+return total;
+    },
+    mult() {
+        let mult = 1;
+        const arrayOfValue = Object.values(this);
+        for (let i=0; i < arrayOfValue.length; i++) {
+            if (typeof arrayOfValue[i] === "number") {
+              mult *= arrayOfValue[i];
+            }
+        }
+        return mult;
+},
+}
+console.log(calculator.read(9, 10));
+console.log(calculator.sum());
+console.log(calculator);
+console.log(calculator.mult());
+
+// EX 9 Визначити загальну суму замовлення у змінну . якщо об*єкт порожній результат буде 0
+const cart = {
+    apple: 50,
+    banana: 38,
+    orange: 40,
+    total() {
+        let totalCost = 0;
+        for (const value in this) {
+            console.log(`${this[value]} - ${value}`);
+            if (typeof this[value] === "number") {
+            totalCost += this[value];
+        }
+    }
+        return totalCost;
+    },
+    // total() {
+    //     let totalCost = 0;
+    //     const arr = Object.values(this);
+    //     console.log(arr);
+        
+    //     for (const value of arr) {
+    //         if (typeof value === "number") {
+    //         totalCost += value;
+    //         }
+    //     }
+    //     return totalCost;
+    // },
+}
+console.log(cart.total());
+// EX 10 розраз заг суму всіх замовлень в масиві об*єктів та вивести її у шаблонний рядок
+const orders = 
+   [
+    {id: 1, item: "футболка", quantity: 2, price: 15,},
+    {id: 2, item: "шорти", quantity: 3, price: 20,},
+    {id: 3, item: "кросівки", quantity: 1, price: 50,},
+];
+function totalOrders(){
+   
+};
+let totalAmount = 0;
+for (const order of orders){
+    totalAmount += (order.quantity * order.price);
+}
+console.log(`Загальна сума всіх замовлень: ${totalAmount}`);
