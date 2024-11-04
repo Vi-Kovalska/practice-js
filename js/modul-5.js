@@ -692,7 +692,7 @@ console.log(descendingScores); // [92, 74, 61, 56, 35, 19]
 
 // Якщо виклик compareFunction(a, b) поверне 0, сортування залишить a і b незмінними по відношенню один до одного, але відсортує їх по відношенню до всіх інших елементів.
 
-// Зверни увагу, що при сортуванні масиву чисел і передачі в метод toSorted() колбек-функції, числа вже не будуть приводитися до рядків, тобто їх сортування 
+// Зверни увагу, що при сортуванні масиву чисел і передачі в метод toSorted() кКОЛБЕК-ФУНКЦІЇ, числа вже не будуть приводитися до рядків, тобто їх сортування 
 // ex ascendingReleaseDates за зростанням, descendingReleaseDates за спаданням
 const releaseDates = [2016, 1967, 2008, 1984, 1973, 2012, 1997];
 
@@ -799,3 +799,284 @@ const namesAuthor = books3333
 
   console.log(namesAuthor);
   
+  //..........................................................PRACTICE
+  // КОЛБЕК ФУНКЦІЯ
+  function calc(a, b, callback){
+     return callback + a**b;
+  }
+  function math(x, y){
+    return x**y;
+  }
+
+  console.log(calc(3,2, math(2,3)));
+  // callback створюємо зовні і потім під час виклику функції вищого порядку просто передаємо колбек функцію як аргумент 
+  function each(array, callback) {
+const newArr =[];
+for (const item of array){
+  const res = callback(item);
+  newArr.push(res);
+}
+return newArr;
+  }
+  function easy(value) {
+    return value * 2;
+  }
+
+  console.log(each([1, 2, 3, 4], easy));
+  //  передаємо колбек фунцію відразу як аргумент під час виклику функції вищого порядку
+  function calc2(a,b,callback){
+const result = callback(a,b);
+console.log(result);
+  }
+calc2(2, 3, function(x,y){ return x**y;});
+
+// оголошуємо колбек функцію за допомогою синтаксису стрілочної функції під час виклику функції вищого порядку (менше коду)
+const example = (a, b, callback) => {
+  const result = callback (a, b);
+  console.log(result);
+  
+  return result;
+}
+example(2,3, (x, y) => {return x+y;});
+// те саме але стрілочна функція з неявним перетворенням (ще менше коду)
+example(2,34, (x,y) => x/y);
+
+// метод forEach(callback)
+// - поелементно перебирає вихідний масив
+// -нічого не повертає
+// - замінює класичний for, якщо не потрібно переривати цикл 
+// - стрілочну ф-цію зручно передавати у forEach()
+
+// const arrey69 =[56, 34, 26, 49, 81, 93];
+// let multy = 1;
+// arrey69.forEach((element, index, array) => {
+//   console.log(element, index, array);
+//   multy *= element;
+//   console.log(multy);
+// });
+// коротший запис, можна опустити () якщо у нас один параметр (нам не потрібен індекс та посилання на масив) + опустили {} неявне повернення стрілочної ф-ції
+const arrey69 =[56, 34, 26, 49, 81, 93];
+let multy = 1;
+arrey69.forEach( element => multy *= element );
+console.log(multy);
+
+// рефакторинг (forEach + arrow function)
+const items = ["Mango", "Kiwi", "Apple", "Orange", "Grape"];
+// function logItems(items) {
+//   console.log(items);
+//   for (let i=0; i<items.length; i++) {
+//     console.log(`${i+1} - ${items[i]}`);
+//   }
+// }
+// console.log(logItems(items));
+items.forEach((element, index) => {
+    console.log(`${index+1} - ${element}`);
+    return `${index+1} - ${element}`;
+});
+// refactoring
+// function printContactsInfo({names, phones}) {
+//   const namesArr = names.split(",");
+//   const phonesArr = phones.split(",");
+//   for (let i=0; i<names.length; i++) {
+//     console.log(`${namesArr[i]} : ${phonesArr[i]}`);
+//   }
+//   return "cycle for";
+// }
+// printContactsInfo({
+//   names: "Jacob,William,Mark",
+//   phones: "80956743333,80976743543,80509745558"
+// });
+// 
+const printContactsInfo = ({names, phones}) => {
+  const namesArr = names.split(",");
+  const phonesArr = phones.split(",");
+  namesArr.forEach((name, index) => {
+console.log(`${name} : ${phonesArr[index]}`);
+  })
+};
+printContactsInfo({ names: "Jacob,William,Mark", phones: "80956743333,80976743543,80509745558"})
+
+// 
+const calculateAvarege = (...args) => {
+  let total = 0;
+  args.forEach(item => total += item);
+  return total/args.length;
+}
+console.log(calculateAvarege(23, 56, 41, 89));
+
+// ф-ція поверта масив моделей машин з об*єкту 
+const carsObj = [
+  {model: "INFINITI QX80",
+    year: 2025,
+    price: 0,
+    type: "luxury SUV",
+    quantity: 0,
+  },
+  {model: "RANGE ROVER HSE",
+    year: 2024,
+    price: 7032687,
+    type: "SUV",
+    quantity: 2,
+  },
+  {
+    model: "Peugeot Landtrek",
+    year: 2024,
+    price: 1467300,
+    type: "pickup truck",
+    quantity: 3,
+  }
+]
+const getArreyOfCarsModel = (obj) => {
+  const arrModel = [];
+  obj.forEach(car => {
+    arrModel.push(car.model);
+  })
+  return arrModel;
+}
+console.log(getArreyOfCarsModel(carsObj));
+// на відміну від форич метод .map() повертає новий масив (довжина така ж як у визідного) тому щоб не створювати пустий масив доя форич можна відразу присвоїти змінній результат роботи метoду .map()
+const getArreyOfCarsModelMap = (obj) => {
+  const result = obj.map(car => car.model);
+  return result;
+};
+console.log(getArreyOfCarsModelMap(carsObj));
+// ф-ція поверта новий масив об*єктів де прайс змінена на ціну зі знижкою
+const makePriceWithDiscount = (arr, discount) => {
+ return arr.map( car => {
+     return {
+      // розгорнули в масив всі об*єкти машин 
+          ...car,
+          // переприсвоїли нову ціну у кожному об*єкті машини
+          price: car.price * (1-discount),
+          }
+    });
+};
+console.log(makePriceWithDiscount(carsObj, 0,2));
+
+// збільшити к-ть годин графця за id
+const playerIdToUpdate = "player-3";
+
+const plaers7 = [
+  {id: "player-1",
+    name: "Poli",
+    timePlayed: 230,
+    online: true,
+    grade: 3,
+  },
+  {id: "player-2",
+    name: "Kiwi",
+    timePlayed: 30,
+    online: true,
+    grade: 1,},
+  {id: "player-3",
+    name: "Banana",
+    timePlayed: 170,
+    online: false,
+    grade: 2,},
+];
+
+const updateTimePlayed = plaers7.map((player) => {
+    if (player.id === playerIdToUpdate){
+    return {
+...player,
+timePlayed: (player.timePlayed + 100),
+    }
+  } 
+  return player;
+  })
+  console.log(updateTimePlayed);
+  
+  // МЕТОД .filter()
+  // - поелементно перебирає оригінальний масив 
+  // - повертає новий масив (з елементами або порожній)
+  // - додає в масив що повертається елементи які задовільняють умови колбек ф-ції:
+  //           - якщо колбек повернув true ел додається в NEWмасив 
+  //            -                     false елемент НЕ додається в NEWмасив 
+  const numbers41 = [21, 56, 89, 43];
+  const filtered = numbers41.filter((num, index) => {
+    if (Number.isFinite(num)) {
+      return true;
+   } else {
+    return false;
+   }
+  })
+  console.log(filtered);
+  
+  // Number.isFinite(num) -  функция определяет, является ли переданное значение конечным числом. Если необходимо, параметр сначала преобразуется в число.Если аргумент является NaN, положительной или отрицательной бесконечностью, метод вернёт false; иначе возвращается true.
+
+  // EX
+  const findPrice = 0;
+  // неявне повернення (implicit return)
+  const priceFiltered = (obj, x) => obj.filter(car => car.price === x);
+  console.log(priceFiltered(carsObj, findPrice));
+  
+  // METHOD .find()
+  // - поелементно перебирає оригінальний масив
+  // - повертає першиЙ ЕЛЕМЕНТ що задовільняє умову або UNDEFINED  ЯКЩО НІЧОГО НЕ ЗАДОВІЛЬНЯЄ 
+  const fined = numbers41.find((element) => element > 15);
+  console.log(fined);
+  
+  // METHOD .every()
+  //  - поелементно перебирає вихідний масив
+  // - поверта TRUE ЯКЩО ВСІ ЕЛЕМЕНТИ масиву задовільняють умову
+  // EX
+  const isOnline = plaers7.every(player => player.online);
+  console.log(isOnline);
+  
+  // METHOD .some()
+  // - поелементно перебирає вихідний масив
+  // - поверта TRUE ЯКЩО ХОЧАБ ОДИН ЕЛЕМЕНТ масиву задовільняє умову
+  const some = plaers7.some(player => player.online && (player.grade === 3) );
+  console.log(some);
+  
+  // METHOD .reduce()
+  // - поелементно перебирає вихідний масив
+  // - значення що повертається залежить від розробника
+  // - найчастіше викор щоб порах суму
+  // повертає наступне значення акумулятора
+  //                           акумулятор - місце збереження проміжного результату колбек ф-ції                          
+                 //                                          другий параметр (не обов*язковий)- початкове значення акумулятора, якщо його не передати то ним стане ПЕРШИЙ ел масиву
+  const total0 = numbers41.reduce((acc, el, indx, arr) => {
+    return acc + el;
+  }, 0);
+  console.log(total0);
+  // те саме але поч знач акк = 1 і рез став на 1 більше
+  const total01 = numbers41.reduce((acc, el, indx, arr) => {
+    return acc + el;
+  }, 1);
+  console.log(total01);
+  // те саме але поч знач акк = 2 і рез став на 2 більше
+  const total002 = numbers41.reduce((acc, el, indx, arr) => {
+    return acc + el;
+  }, 2);
+  console.log(total002);
+  
+  // рахуємо зп 
+  const salary = {
+    mango: 100,
+    poly: 50,
+    ajax: 150,
+  }
+//              створ масив із об*єкту     рах суму 
+  const total = Object.values(salary).reduce((acc, num) => acc+num, 0);
+  console.log(total);
+  
+  // рах заг к-ть год гравців , приклад де краще вказати початкове значення акк бо в против випадку значення акк візьметься з першого ел масиву - це об*єкт і вийде не сума а об*єкт+числа
+  const totalTimePlaed = plaers7.reduce((acc, el) => acc + el.timePlayed, 0);
+  console.log(totalTimePlaed);
+  console.log(plaers7);
+  
+//
+const cart35 = [
+  {label: "banana", price: 100, quantity: 30,},
+  {label: "pineapple", price: 200, quantity: 10,},
+  {label: "dragon-fruit", price: 250, quantity: 5,},
+];
+const getTotalOfCart = cart35.reduce((acc, el) => { 
+  return acc + el.price * el. quantity;
+  }, 0);
+console.log(getTotalOfCart);
+
+// METHOD .toSorted()
+//  - за замовчуванням сортує за зростанням
+//  - за замовч прирівнює елементи до рядка і сортує за табл Unicode
