@@ -1,9 +1,11 @@
 body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: blanchedalmond;
     background-color: rgba(0, 0, 0, 0.856);
 }
 a {
     text-decoration: none;
+    display: block;
 }
 ul, ol {
     list-style-type: none;
@@ -14,6 +16,12 @@ ul, ol {
 button { 
     cursor: pointer;
     font-family: inherit;
+    border-radius: 10px;
+    width: auto;
+    height: 30px;
+    font-size: 16px;
+    border-color: cyan;
+    box-shadow: 5px 5px 30px crimson;
 }
 h1, h2, h3, h4, h5, h6, p {
     margin-top: 0;
@@ -43,4 +51,153 @@ input {
     justify-content: center;
     text-align: center;
     flex-wrap: wrap;
+    margin-bottom: 20px;
+   
 }
+.ex {
+    font-size: 30px;
+    color: darkorchid;
+    text-align: center;
+}
+/* ex */
+.nav-item-link{
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+/* ex */
+.transaction-table, th{
+    border: 1px solid #fff;
+    margin-bottom: 20px;
+}
+
+.log-list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  
+  .log-item {
+    flex-basis: calc((100% - 16px) / 2);
+    position: relative;
+    padding: 4px;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: monospace;
+  }
+  
+  .log-item > .chip {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  input {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px;
+    border-radius: 8px;
+    font: inherit;
+    letter-spacing: inherit;
+  }
+  /* ex */
+  .form {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 32px;
+    margin-bottom: 20px;
+  }
+  .feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+  }
+  /* ex */ 
+  .box-1{
+    width: 500px;
+    height: 500px;
+    background-color: darkturquoise;
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .box-1>p , .box-2>p {
+    font-size: 45px;
+    text-align: center;
+  }
+  .box-2{
+    width: 270px;
+    height: 250px;
+    background-color: fuchsia;
+    position: absolute;
+    margin-top: 25px;
+    margin-left: 125px;
+  }
+  .box-active {
+    background-color: chartreuse;
+  }
+  .box2-active {
+    color: transparent;
+    background-image: 
+    url(/images/logo-js.jpg);
+    background-position: center;
+    background-size: cover;
+  }
+  /* Example */
+.car-search {
+border: 1px solid rgb(151, 233, 69);
+background-color: chartreuse;
+display: flex;
+gap: 24px;
+align-items: baseline;
+justify-content: center;
+}
+/* example */
+.div-for-figure {
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-width: 486px;
+    min-height: 134px;
+    background-color: #F6F6FE;
+    border-radius: 8px;
+    padding: 32px;
+        }
+        .p-js{
+            color: transparent;
+        }
+        .input {
+            width: 150px;
+            height: 40px;
+            border: 1px solid #808080;
+            border-radius: 4px;
+            transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .input:hover, input:focus{
+                border: 1px solid #000000;
+            }
+            .input:active{
+                border: 1px solid #808080;
+            }
+            #controls {
+                background-color: #F6F6FE;
+        width: 486px;
+        height: 104px;
+        border-radius: 8px;
+        padding: 32px;
+        margin-bottom: 16px;
+            }

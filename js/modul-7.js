@@ -63,7 +63,15 @@ for (const item of spanHeader){
      arraySpanHeader.push(item.textContent );
 }
 console.log(arraySpanHeader);
-//                                             Властивість classList
+
+// ..................................................властивысть el.children 
+// поверне псевдомасив із всіма дітьми елемента 
+// el.children[0] - поверне 1 дитину  
+// ....властивість el.firstChild and el.lastChild поверне 1 /останній дочірній елемент
+// властивість el.childNode - поверне dв псевдомасиві  всі дочірні ел включаючі текстові ноди(пробіли #text)
+// el.previousElementSibling - поверне попередній елемент (той що вище у коді)
+//  el.nextElementSibling - поверне наступний ел (той що нижче у коді)
+//                                Властивість classList
 
 // Для того щоб із JavaScript коду прочитати, додати, видалити або перевірити наявність CSS-класу в елемента, у властивості classList зберігається об'єкт із методами для роботи з CSS-класами елемента.
 //         Властивість classList — це спеціальний тип об’єкта, який подібний до масиву. Зверни увагу, що він схожий, але не є нативним JavaScript-масивом, який ми вивчали раніше. Він зберігає в собі весь перелік класів DOM-елемента, властивість length і властивість value.
@@ -112,4 +120,623 @@ console.log(image.hasAttribute("alt")); // false
 
 // А ось видалити або перевірити наявність буде зручніше, використовуючи відповідний метод.
 
+// створюємо атрибут для елемента
+//  el = document.querySelector(`.className[href="значення атрибута"]`);
+// ......................................................Власні атрибути
+// Власні data-атрибути -  дозволяють додати до тегу довільний атрибут і отримати його значення в JavaScript.  коли нам потрібно зберегти певну інформацію на тезі, наприклад, вказати тип дії кнопки, щоб потім у певний момент часу мати можливість отримати до неї доступ. 
+/* <button type="button" data-action="save">Save text</button>
+<button type="button" data-action="close">Close editor</button> */
+//                                                         Отримання значень
+// Для отримання значення data-атрибута - властивість dataset, після якої через крапку пишеться ім'я атрибута без data-. Тобто data- відкидається, а інша частина імені записується як ім'я властивості об'єкта.
+// const saveBtn = document.querySelector('button[data-action="save"]');
+// console.log(saveBtn.dataset.action); // "save"
+//                                                           Зміна значень
+// Змінити значення існуючого data-атрибута або додати новий можна так само, як і будь-якої іншої властивості об'єкта в JavaScript. Щоб це зробити, треба отримати доступ до DOM-елемента, а потім змінити/задати значення властивості в об'єкті dataset.
+// // Змінюємо значення data-action для кнопки saveBtn
+// saveBtn.dataset.action = "update";
 
+// // Додаємо новий data-атрибут data-role
+// saveBtn.dataset.role = "admin";
+//...................................................Створення та видалення елементів
+// DOM API (Document Object Model Application Programming Interface) має широкий функціонал. За його допомогою можна:
+// вибирати або змінювати вже існуючі елементи
+// видаляти елементи
+// створювати нові елементи й додавати їх у документ
+
+// Розглянемо, як створити новий елемент:
+// document.createElement(tagName)
+
+// створює елемент з ім'ям tagName і повертає посилання на його об’єкт як результат свого виконання.
+// tagName — це рядок, що вказує тип елемента, який створюється.
+// Елемент створюється в пам'яті, у DOM його ще немає.
+
+
+// const heading = document.createElement("h1");
+// Після створення елемента heading отримуємо ПОСИЛАННЯ на його об’єкт у пам'яті. З цього моменту можна звертатися до властивостей цього об’єкта і змінювати їх ще до того, як вставимо цей елемент у DOM.
+
+// const heading = document.createElement("h1");
+// heading.classList.add("title");
+// heading.textContent = "This is a heading";
+// console.log(heading); // <h1 class="title">This is a heading</h1>
+
+//                                                 Додавання елементів
+
+// Щоб створений елемент відображався на сторінці, його необхідно додати до вже існуючого елемента в DOM-дереві.
+
+// elem.append(el1, el2, ...) — додає один або декілька елементів після всіх дітей елемента elem.
+// elem.prepend(el1, el2, ...) — додає один або декілька елементів перед усіма дітьми елемента elem.
+
+// У всіх цих методах el — це елементи або рядки, у будь-якому поєднанні та кількості. Рядки додаються, як текстові вузли.
+// Зверни увагу! Якщо елемент для додавання вже знаходиться в DOM, то він видаляється зі свого старого місця й додається у нове. Отже, є правило: один і той самий елемент не може бути одночасно у двох місцях.
+//                                                         Видалення елементів
+//  метод element.remove().
+
+// <p class="text">Random text content</p>
+
+// Він викликається на елементі element, який необхідно видалити.
+
+// const text = document.querySelector(".text")
+// text.remove();
+//        ......................................................Властивість innerHTML
+// Існує ще один спосіб створити DOM-елементи і помістити їх у DOM-дерево.Для цього треба використати рядки з тегами і дозволити браузеру зробити всю важку роботу. 
+// Властивість innerHTML зберігає вміст елемента, включно з тегами, у вигляді рядка. Значення, що повертається, — це завжди валідний HTML-код.
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!Використовуй властивість element.innerHTML для додавання тільки у разі, 
+// — коли елемент element порожній щоб не було додаткових витрат на повторне створення вже існуючої розмітки або
+// — якщо потрібно повністю замінити вміст element
+
+// Зміна
+// Властивість innerHTML доступна і для читання, і для запису. Якщо записати в неї рядок з HTML-тегами, то браузер під час парсингу рядка перетворить його у валідні елементи і додасть у DOM-дерево.
+
+// !!!!ростий і швидкий спосіб видалення всього вмісту - якщо у властивість innerHTML записати порожній рядок, то вміст елемента буде очищено. 
+// // ..........Однотипна (шаблонна) розмітка створюється із масиву даних.
+// Прийом полягає в перебиранні цього масиву та створенні одного рядка з HTML-тегами, який потім записуємо в innerHTML елемента. Якщо ти будеш це робити за допомогою методу map(), не забудь, що він повертає масив. Отже, перед тим як додавати розмітку в DOM, цей масив треба привести до рядка за допомогою методу join()
+// HTML
+// <section>
+//   <h2>Popular technologies</h2>
+//   <ul class="list"></ul>
+// </section>
+// Java Script
+// const technologies = ["HTML", "CSS", "JavaScript", "React", "Node"];
+// const list = document.querySelector(".list");
+
+// const markup = technologies
+//   .map((technology) => `<li class="list-item">${technology}</li>`)
+//   .join("");
+
+// // Check the console, you'll see a single string with HTML tags
+// console.log(markup);
+
+// // Adding all the markup in one operation
+// list.innerHTML = markup;
+
+// Нове значення для element.innerHTML повністю видалить і повторно створить усіх нащадків елемента element. Якщо елемент спочатку не був порожній, то виникнуть додаткові витрати на повторне створення вже існуючої розмітки, а це погано.
+// HTML і не порожній елемент артикль
+// <article class="article">
+//   <h2>Article title</h2>
+// </article>
+// JavaScript 
+// const article = document.querySelector(".article");
+// const htmlString = `<p class="article-text">Nullam quis ante. Vestibulum dapibus nunc ac augue. In consectetuer turpis ut velit.</p>
+//    <a class="link" href="#">Read more...</a>`;
+
+// // Replace += with = operator. See the difference? 
+// // Article title is lost because we overwrite element content.
+// article.innerHTML += htmlString;
+
+// Властивість innerHTML у JavaScript встановлює або отримує HTML-вміст елемента.
+
+//................................................Метод insertAdjacentHTML()
+// Метод insertAdjacentHTML() — це сучасний метод для додавання рядка з HTML-тегами перед, після або всередину елемента. Він вирішує проблему innerHTML з повторною серіалізацією вмісту елемента під час додавання розмітки до вже існуючої.
+
+// element.insertAdjacentHTML(position, string)
+
+// Аргумент position — це рядок, який визначає позицію щодо елемента element. Він приймає одне з чотирьох значень.
+
+// "beforebegin" — перед element
+// "afterbegin" — всередині element, перед усіма дітьми
+// "beforeend" — всередині element, після усіх дітей
+// "afterend" — після element
+
+
+// Значення "beforebegin" і "afterend" працюють тільки тоді, коли element вже знаходиться в DOM-дереві. Обмеження зумовлене тим, що неможливо дізнатися, куди вставляти розмітку, доти, доки елемент не буде перебувати в DOM-дереві.
+// HTML 
+// <ul class="list">
+//   <li class="list-item">HTML</li>
+//   <li class="list-item">CSS</li>
+//   <li class="list-item">JavaScript</li>
+// </ul>
+// Java Script додаємо ще лішки після створених лішок і додаємо заголовок перед списком
+// const list = document.querySelector(".list");
+
+// const newTechnologies = ["React", "TypeScript", "Node.js"];
+// const markup = newTechnologies
+//   .map((technology) => `<li class="list-item new">${technology}</li>`)
+//   .join("");
+
+// list.insertAdjacentHTML("beforeend", markup);
+// list.insertAdjacentHTML("beforebegin", "<h2>Popular technologies</h2>");
+
+// ЕХ створюємо та додаємо новий пункт меню
+//              створ лышку ы додали клас
+const navItemElement = document.createElement("li"); 
+navItemElement.classList.add("nav-item");
+// створ посилання ы додали атрибут та класс і додали текст в тег а
+const navItemLink = document.createElement("a");
+navItemLink.href = "https://github.com/Vi-Kovalska";
+navItemLink.classList.add("nav-item-link");
+navItemLink.textContent = "Click me"
+// вкладаємо тег а в тег li
+navItemElement.append(navItemLink);
+// отримуємо тег ul щоб додати туди тег li>a
+const menu = document.querySelector("ul");
+// додаєм створений тег li в список ul 
+menu.append(navItemElement);
+
+// EX на основі масиву об*єктів  у <div class="color-picker"></div> створюєм тег button для кожного обєкта з назвою що міститься у label
+const options = [
+     {label: "darkred", color: "#8b0000",},
+     {label: "greenyellow", color: "#adff2f",},
+     {label: "brown", color: "#a52a2a",},
+     {label: "orchid", color: "#da70d6",}
+];
+// // отримуємо дів ел 
+// const divContainer = document.querySelector(".color-picker")
+// //           перебираєм масив і витягаємо значенння із об*єкту
+// const elements = options.map(option => {
+//      //         створюєм кнопку
+// const buttonEl = document.createElement("button");
+// buttonEl.classList.add("btn-color")
+// //                додаєм текст для кнопки із властивості об*єкту
+// buttonEl.textContent = option.label;
+// //             додаєм колір кнопки із властивості об*Єкту
+// buttonEl.style.backgroundColor = option.color;
+// return buttonEl;
+// });
+// console.log(elements);
+// // додаємо елементи методом .append() розгорнувши спред оператором значення із масиву 
+// divContainer.append(...elements);
+
+// EX переписуєм попередній код у функцію щоб автоматизувати 
+// const divContainer = document.querySelector(".color-picker")
+const divContainer = document.querySelector(".color-picker")
+const createButtons = (array) => {
+     return array.map((option) =>{
+          const buttonEl = document.createElement("button");
+          buttonEl.classList.add("btn-color")
+         
+          buttonEl.textContent = option.label;
+          
+          buttonEl.style.backgroundColor = option.color;
+          return buttonEl;
+          
+     })
+     };
+     divContainer.append(...createButtons(options));
+
+     // EX є шапка таблиці в HTML,  в JavaScript дописуємо дані в таблицю взявши їх з масиву об*єктів
+     const allKeys = Array.from(document.querySelectorAll("th"));
+     const textForAllKeys = allKeys.map(key => key.textContent);
+console.log(textForAllKeys.join(" "));
+
+     const accounts = [
+          {id: 509766, amount: 3900, date: "24.03.2014", who: "Arnold", transactionType: "deposit", accountName: "hfhdjfhj", accountNumber: 9548976,},
+          {id: 509766, amount: 3900, date: "24.03.2014", who: "Arnold", transactionType: "invoice", accountName: "hfhdjfhj", accountNumber: 9548976,},
+          {id: 509766, amount: 3900, date: "24.03.2014", who: "Arnold", transactionType: "payment", accountName: "hfhdjfhj", accountNumber: 9548976,}
+     ]
+     const transactionTable = document.querySelector(".transaction-table");
+const createMarkup = (arr) => {
+     return arr.map(obj => 
+    `<tr class="tr">
+     <td class="td">${obj.id}</td>
+     <td class="td">${obj.amount}</td>
+     <td class="td">${obj.date}</td>
+     <td class="td">${obj.who}</td>
+     <td class="td">${obj.transactionType}</td>
+     <td class="td">${obj.accountName}</td>
+     <td class="td">${obj.accountNumber}</td>
+    </tr>`
+).join("");
+}
+transactionTable.insertAdjacentHTML("beforeend", createMarkup(accounts));
+
+// звернемось до всіх tr td і додамо їм бордер
+const tr = Array.from(document.querySelectorAll("tr"));
+tr.map(el => el.style.border = "1px solid #fff");
+const td = Array.from(document.querySelectorAll("td"));
+td.map(el => el.style.border = "1px solid #fff");
+
+// ................................................Події (events)
+// Події використовуються для реакції на дії користувача й виконання коду, пов'язаного з певною подією.
+// Для того щоб елемент реагував на дії користувача, до нього необхідно додати слухача події та визначити йому обробника.
+//                                          Метод addEventListener() 
+// - додає слухача події на елемент.
+// element.addEventListener(event, handler, options)
+// event — рядок, що містить ім'я події, наприклад, "click"
+// handler — колбек-функція, яка буде викликана під час настання події
+// options — необов'язковий об'єкт параметрів із розширеними налаштуваннями
+//                                         removeEventListener() 
+// видаляє слухача події з елемента. Aргументи аналогічні методу addEventListener()
+// !!!!!!!!!!!!!!!важливо використовувати ту саму функцію-обробник, яка була призначена в addEventListener. З цієї причини рекомендовано для обробників подій використовувати іменовані функції, які можна легко передавати як аргументи.
+
+//                                                    Об'єкт події
+// Кожна подія — це об'єкт, який містить інформацію про деталі події та автоматично передається першим аргументом в обробник події. Усі події відбуваються з базового класу Event.
+// Параметр event — це і є об'єкт події, який автоматично передається першим аргументом під час виклику колбек-функції. Ми можемо називати його як завгодно, але, як правило, його оголошують як e, evt або event.
+//        Деякі властивості об'єкта події:
+// = event.type — тип події.
+// = event.currentTarget — елемент, на якому виконується обробник події.
+
+//                                           Події клавіатури
+// Існує дві основні події клавіатури:
+// keydown — подія, що відбувається при натисканні клавіші
+// keyup — подія, що відбувається, коли клавішу відпустили
+
+// На відміну від інших подій, події клавіатури обробляються на документі, а не на конкретному елементі. Об'єкти подій клавіатури походять від базового класу KeyboardEvent.
+
+// document.addEventListener("keydown", event => {
+//   console.log("Keydown: ", event);
+// });
+
+// 
+// Події keydown і keyup спрацьовують при натисканні будь-якої клавіші, включно зі службовими (Ctrl, ShiftAltEscape тощо).
+
+// На практиці переважно обробляють тільки подію keydown, оскільки вона відбувається швидше за keyup і користувач раніше бачить результат натискання.
+
+//                            Властивості key і code
+// - Властивість об’єкта події key повертає символ, згенерований натисканням клавіші на клавіатурі. Ця властивість враховує:
+// стан клавіш-модифікаторів, наприклад Shift
+// поточну мову
+
+
+// Властивість об’єкта події code повертає код фізичної клавіші на клавіатурі й не залежить від мови та стану клавіш-модифікаторів.
+
+// document.addEventListener("keydown", event => {
+//   console.log("key: ", event.key);
+//   console.log("code: ", event.code);
+// });
+// ex
+const clearLogBtn = document.querySelector(".js-clear");
+const logList = document.querySelector(".log-list");
+let keypressCounter = 1;
+
+console.log(clearLogBtn)
+
+document.addEventListener("keydown", logMessage);
+document.addEventListener("keyup", logMessage);
+clearLogBtn.addEventListener("click", reset);
+
+function logMessage({ type, key, code }) {
+  const markup = `<div class="log-item">
+    <span class="chip">${keypressCounter}</span>
+    <ul>
+      <li><b>Event</b>: ${type}</li>
+      <li><b>Key</b>: ${key}</li>
+      <li><b>Code</b>: ${code}</li>
+    </ul>
+  </div>`;
+
+  logList.insertAdjacentHTML("afterbegin", markup);
+
+  if (type === "keyup") {
+    incrementKeypressCounter();
+  }
+}
+
+function reset() {
+  keypressCounter = 1;
+  logList.innerHTML = "";
+}
+
+function incrementKeypressCounter() {
+  keypressCounter += 1;
+}
+
+//                                                     Події елементів форм
+//                                             Подія submit відправка <form></form>
+// Подія submit відбувається безпосередньо на формі (тег form), тому обробник подій слід встановлювати саме на ній.
+// Відправлення форми відбувається:
+//              -при кліку на кнопку з атрибутом type="submit"
+// Або
+//              - при натисканні клавіші Enter під час перебування в будь-якому її текстовому полі форми
+// Подію submit можна застосувати для валідації (перевірки) форми перед відправленням, оскільки на об'єкті події існує багато корисних властивостей, пов'язаних з елементами форми.                                      //   
+// const form = document.querySelector("form");
+
+// form.addEventListener("submit", event => {
+// 	event.preventDefault();
+// });
+
+//                                             метод preventDefault()
+// Для скасування дії браузера за замовчуванням в об'єкта події 
+
+// ЕХ  створює простий журнал подій для подій "keydown" і "keyup”. Клікни мишею по вікну з прикладом, щоб навести на нього фокус. Відстеження подій клавіатури вже знаходиться на елементі document. Надрукуй щось на клавіатурі, щоб побачити результат їх обробки.
+const registerForm = document.querySelector(".form");
+
+registerForm.addEventListener("submit", handleSubmit);
+
+function handleSubmit(event) {
+  event.preventDefault();
+  const form = event.target;
+//   Властивість elements DOM-елемента форми містить об'єкт з посиланнями на всі її елементи, які мають атрибут name. Саме тому в прикладі ми отримуємо значення полів, звертаючись до event.target.elements.login.value і event.target.elements.password.value.
+  const login = form.elements.login.value;
+  const password = form.elements.password.value;
+  
+  if (login === "" || password === "") {
+    return console.log("Please fill in all the fields!");
+  }
+
+  console.log(`Login: ${login}, Password: ${password}`);
+  form.reset();
+}
+
+//                                   Подія change
+// Подія change відбувається після зміни елемента форми.
+
+// - Для текстових полів або textarea подія відбудеться не на кожному введенні символу, а після втрати фокусу. Це не завжди зручно. Уяви, що користувач набирає щось у текстовому полі — подія відсутня. Щойно фокус пропав, відбудеться подія change.
+
+// - Для select, чекбоксів і радіокнопок, подія change спрацьовує відразу під час вибору значення.
+
+// Dластивості при роботі з елементом <select>:
+// value - значення в атрибуті value в елементі опції в HTML
+// selectedIndex - індекс опції у списку (від 0)
+// options - текстова назва опціїї
+// ЕХ
+const select = document.querySelector(".pizza-select");
+const textOutput = document.querySelector(".text-output");
+const valueOutput = document.querySelector(".value-output");
+
+select.addEventListener("change", setOutput);
+
+function setOutput(event) {
+  const selectedOptionValue = event.currentTarget.value;
+  console.log(selectedOptionValue);
+  const selectedOptionIndex = event.currentTarget.selectedIndex;
+  console.log(selectedOptionIndex);
+  const selectedOptionText = event.currentTarget.options[selectedOptionIndex].text;
+console.log(selectedOptionText);
+
+  textOutput.textContent = selectedOptionText;
+  valueOutput.textContent = selectedOptionValue;
+}
+
+//                                                Подія input
+// відбувається тільки на текстових полях і textarea.
+
+// Вона створюється щоразу при зміні значення елемента, не чекаючи втрати фокусу. На практиці input — це найголовніша подія для роботи з текстовими полями форми.
+// ex
+const textInput = document.querySelector(".text-input");
+const output = document.querySelector(".output");
+
+textInput.addEventListener("input", (event) => {
+  output.textContent = event.currentTarget.value;
+});
+
+// Порівняємо події input і change на текстових полях і textarea
+// Подія input:
+// -відбувається при кожній зміні значення (при введенні або видаленні)
+// -не залежить від втрати фокусу
+// Подія change: відбувається після втрати фокусу за умови, що відбулася зміна значення в елементі
+
+//                                      Подія focus і blur
+// Елемент отримує фокус під час кліку миші або переходу клавішею Tab.
+
+// Момент отримання і втрати фокусу дуже важливий. Отримуючи фокус, ми можемо завантажити дані для автозаповнення, почати відстежувати зміни тощо.
+// Під час втрати фокусу — перевірити введені дані.
+
+
+// подія focus відбувається під час фокусування на елементі
+// подія blur відбувається при втраті фокусу, наприклад, користувач клікає в іншому місці екрана
+// Фокус може бути тільки на одному елементі сторінки за одиницю часу.  
+// document.activeElement - gоточний елемент, на якому знаходиться фокус, 
+
+// Більшість елементів не можуть отримати фокус. Наприклад, якщо клікнути по <div>, то фокусування на ньому не відбудеться, тому що це не інтерактивний елемент.
+// ex
+const textInputt = document.querySelector(".text-input-2");
+const setFocusBtn = document.querySelector('[data-action="set"]');
+const removeFocusBtn = document.querySelector('[data-action="remove"]');
+
+setFocusBtn.addEventListener("click", () => {
+  textInputt.focus();
+});
+
+removeFocusBtn.addEventListener("click", () => {
+  textInputt.blur();
+});
+
+textInputt.addEventListener("focus", () => {
+  textInputt.value = "This input has focus";
+});
+
+textInputt.addEventListener("blur", () => {
+  textInputt.value = "";
+});
+
+// Пошук DOM-елементів
+// element.querySelector(selector) - повертає перший елемент, який відповідає вказаному CSS селектору всередині елемента element.
+// element.querySelectorAll(selector) - повертає всі елементи, які відповідають вказаному CSS селектору всередині елемента element.
+
+// Властивості DOM-елемента
+// element.textContent - містить текстовий вміст елемента element, ігноруючи всі теги HTML всередині.
+// element.innerHTML - містить HTML-вміст елемента element.
+// element.style - об'єкт, що містить вбудовані стилі елемента element, які можна змінювати динамічно з JavaScript.
+
+// CSS класи на DOM-елементах
+// element.classList.contains(className) - перевіряє, чи міститься вказаний клас className на елементі element.
+// element.classList.add(className) - додає клас className до списку класів елемента element.
+// element.classList.remove(className) - видаляє клас className зі списку класів елемента element.
+// element.classList.toggle(className) - додає клас className, якщо його немає, або видаляє, якщо він вже присутній, на елементі element.
+// element.classList.replace(oldClassName, newClassName) - замінює клас oldClassName на newClassName в списку класів елемента element.
+
+// Створення та видалення DOM-елементів
+// document.createElement(tagName) - створює новий HTML-елемент з вказаним ім'ям тегу tagName.
+// element.append(el) - додає вміст (або елемент) до кінця списку дочірніх елементів element.
+// element.prepend(el) - додає вміст (або елемент) до початку списку дочірніх елементів element.
+// element.remove() - видаляє DOM-елемент з DOM дерева.
+// insertAdjacentHTML(position, string) - додає вказаний рядок HTML після, перед, всередині або перед вказаним елементом.
+
+// Події
+// element.addEventListener(event, handler) - додає обробник події handler для події event на елемент element.
+// element.removeEventListener(event, handler) - видаляє обробник події handler для події event на елементі element.
+// keydown - подія, яка виникає, коли клавіша на клавіатурі натиснута.
+// submit - подія, яка виникає при відправці форми.
+// change - подія, яка виникає при зміні значення елемента форми.
+// input - подія, яка виникає при введенні даних в текстове поле.
+// focus - подія, яка виникає, коли елемент отримує фокус.
+// blur - подія, яка виникає, коли елемент втрачає фокус.
+
+// ex work with form - it's must have
+const formComment = document.querySelector(".js-form");
+formComment.addEventListener("submit", handleSubmit);
+
+function handleSubmit(event) {
+  // вимкнули дефолтне перезавантаж сторінки при натисканні на кнопку сабміт
+  event.preventDefault();
+  // заходим у властивості подіїї event > target > elements > ключ > value (бачим там всі елементи форми і ключі взяті з атрибута HTML name="" звернувшись до яких ми маєм ще один спосіб отримати дані що ввів користувач у поля)
+  console.log(event);
+  const elements = event.target.elements;
+  const emailValue = elements.email.value;
+  const passwordValue = elements.password.value;
+  const textareaValue = elements.comment.value;
+  
+  if (emailValue === "" || passwordValue === "" || textareaValue === "") {
+    return alert ("All fields must be filled in!");
+  } else {
+     const info = {
+login: emailValue,
+password: passwordValue,
+comment: textareaValue,
+    }
+    console.log(info);
+    // можемо вивести об*єкт в алерт 
+    alert(JSON.stringify(info));
+  }
+// очищаємо форму від даних користувача після збереженнчя
+event.target.reset();
+}
+
+// EX обробка комбінацій клавіш - при натисканні ctrl+C текст не буде копіюватися з document (html page)
+document.addEventListener("keydown", handleKeyPress)
+function handleKeyPress(event) {
+  if ( event.ctrlKey && event.code === "KeyC") {
+    console.log("copyrityng on page"+"!");
+    // вимкнули дефолтне значення клавіш ctrl+C і копіювання не відбудеться
+    event.preventDefault();
+  }
+}
+
+//                                  Події миші
+// - mouseenter (навели мишку на об*єкт події) and mouseleave (вивели мишку з об*єкта події)
+// - mousover and mouseout - те саме але ці властивості чутливі до вкладених елементів (зайшли на елемент - mousover, якщо натрапили на вкладений елемент спочатку відбудеться вихід з батьківського ел -mouseout а потім вхід у дочірній елемент   mousover)
+// - mousemove (chatty event - балакуча подія) - подія відбув під час кожного руху мишки, показує точні координати знаходження мишки 
+
+// коли mouseenter - наводимо на div (об*єкт події) - додаємо класс ".box-active" що робить back-ground іншого кольору ; коли виводимо мишку mouseleave з об*єкта події видаляємо клас .box-active" і back-ground стає як був до створення цього класу
+const box = document.querySelector(".box-1");
+const box2 = document.querySelector(".box-2");
+
+box.addEventListener("mouseenter", addClass);
+box.addEventListener("mouseleave", remuvClass);
+
+box2.addEventListener("mouseenter", addClass);
+box2.addEventListener("mouseleave", remuvClass);
+
+function addClass(event) {
+console.log("Attention mouseenter");
+box.classList.add("box-active");
+box2.classList.add("box2-active");
+}
+
+function remuvClass(event) {
+console.log("Ops...mouseleave");
+box.classList.remove("box-active");
+box2.classList.remove("box2-active")
+}
+// Ex створюєм із масива фото-колекцію карток в список
+const cars = [
+  {brand: "INFINITI", type: "Luxury SUV QX80", year: "2025", price:"", src:"./images/infiniti-qx80.jpg",},
+  {brand: "Volkswagen", type: "Electric SUV  ID.4", year: 2024, price:"$39,735", src:"./images/volkswagen-id-4.jpg",},
+  {brand: "Toyota", type: "Truck Tundra i-FORCE MAX", year: "2025", price:"$72,510", src:"./images/toyota-tundra-i-force-max.jpg",},
+];
+function createMarkup2 (arr) {
+  return arr.map((car) => 
+    `<li class="car-card">
+  <img src="${car.src}" alt="${car.type}" class="img-car" width="500" height="400"/>
+  <h2 class="car-titel">${car.brand} - ${car.year}</h2>
+  <h3 class="car-type">${car.type}</h3>
+  <p class="car-price">${car.price}</p>
+  </li>`).join("");
+}
+console.log(createMarkup2(cars));
+
+const ulCars = document.querySelector(".cars-list");
+// ulCars.style.displey = "flex";
+// ulCars.style.flexDirection = "column"
+// ulCars.style.gap = "25px";
+// ulCars.style.alignItems = "center";
+// ulCars.style.justifyContent = "center";
+// const liCar = document.querySelector(".car-card");
+// liCar.style.border = "1px solid #808080";
+
+ulCars.insertAdjacentHTML("beforeend", createMarkup2(cars));
+
+const formCars = document.querySelector(".car-search");
+formCars.addEventListener("submit", handleSearch);
+function handleSearch (event) {
+  event.preventDefault();
+
+  console.log(event);
+  
+}
+// ЕХ
+function getRandomHexColor() {
+          return `#${Math.floor(Math.random() * 16777215)
+          .toString(16)
+          .padStart(6, 0)}`;
+      };
+
+      const form = document.querySelector("#controls");
+const input = document.querySelector(".input-6");
+const btnCreate = document.querySelector(".btn-create"); 
+const btnDestroy = document.querySelector(".btn-destroy"); 
+const div = document.querySelector("#boxes");
+
+// function inputData(event) {
+//   const amount = event.target.value;
+//   console.log(amount);
+
+//   return amount;
+//   }
+  
+//   input.addEventListener("input", inputData);
+  
+  function create (event){
+    event.preventDefault();
+console.log(event);
+const inputLink = event.target.elements.input;
+const amount = inputLink.value;
+console.log(amount);
+if (amount >= 1 && amount <= 100) {
+    for (let i = 1; i <= amount; i++) {
+    div.insertAdjacentHTML("afterbegin", `<div class="color-div" width="30" height="30"><p class="p-js">JS</p></div>`);
+                   const colorDiv = document.querySelector(".color-div");
+                   colorDiv.style.backgroundColor = getRandomHexColor();
+                   colorDiv.style.width = "30px";
+                   colorDiv.style.height = "30px";
+                   console.log(Number.parseFloat(colorDiv.style.width) >= 30 && (Number.parseFloat(colorDiv.style.height) >= 30));
+       if((Number.parseFloat(colorDiv.style.width) >= 30) || (Number.parseFloat(colorDiv.style.height) >= 30)){
+                    colorDiv.style.width = `${Number.parseFloat(colorDiv.style.width) + Number.parseFloat("100px")}px`;
+                    console.log(colorDiv.style.width);
+                    
+                    colorDiv.style.height = `${Number.parseFloat(colorDiv.style.height) + Number.parseFloat("100px")}px`;
+                    console.log(colorDiv.style.height); 
+                     }
+}
+}
+
+}
+form.addEventListener("submit", create);
+
+const destroyBoxes = () => {
+      return div.innerHTML = "";
+      }
+
+      
+      btnDestroy.addEventListener("click", destroyBoxes);
