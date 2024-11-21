@@ -12,6 +12,8 @@
     <script src="./js/modul-5.js" defer></script>
     <script src="./js/modul-6.js" defer></script>
     <script src="./js/modul-7.js" defer></script>
+    <script src="./js/modul-8.js" defer></script>
+    <script src="./js/modul-9.js" defer></script>
 </head>
 <body>
     <h1 class="header">There's no better <span class="span">time</span> than now. <br/> Don't stop <span class="span">to learning JavaScript</span> !</h1>
@@ -88,27 +90,111 @@
   <div class="box-2"> <p>Are you having a bad day? It's sad:c</p></div>
 </div>
 <h2 class="ex">Example</h2>
-<form action="submit" class="car-search">
+<form id="formSearchCars" action="submit" class="car-search">
   <div class="div-car-group">
-    <input type="text" name="query" class="car-input" placeholder="Search">
+    <input  type="text" name="query" class="car-input" placeholder="Search">
     </div>
     <div class="div-car-group">
       <select name="options" class="car-select">
-        <option value="car">Brand</option>
-        <option value="type">Model</option>
+        <option  value="car">Brand</option>
+        <option  value="type">Model</option>
       </select>
   </div>
-  <button type="submit" class="car-btn">Search the car</button>
+  <button  type="submit" class="car-btn">Search the car</button>
 </form>
-<ul class="cars-list"></ul>
+<ul  class="cars-list"></ul>
 
 <h2 class="ex">Example</h2>
-<form id="controls">
-    <input class="input-6" type="number" min="1" max="100" step="1" name="input"/>
-    <button class="btn-create" type="submit" data-create>Create</button>
-    <button class="btn-destroy" type="submit" data-destroy>Destroy</button>
-  </form>
+<div id="controls">
+    <input id="amountInput" class="input" type="number" min="1" max="100" step="1" name="input" placeholder="Fill me up"/>
+    <button id="btnCreate" class="btn-create" type="submit" data-create>Create</button>
+    <button id="btnDestroy" class="btn-destroy" type="submit" data-destroy>Destroy</button>
+  </div>
   
   <div class="div-for-figure" id="boxes" ></div>
+  <h2 class="ex">Example</h2>
+  <div class="div-kitty-btns">
+  <button class="btn-move-the-box">Move me</button>
+  <button class="kitty-go-back">Go back</button>
+</div>
+  <div class="box"><img class="img-kitty" src="./images/kitty.jpg" alt="The cute kitty"></div>
+  <h2 class="ex">Example</h2>
+  <p class="output">Selected color: -</p>
+<div class="color-palette"></div>
+<h2 class="ex">Example</h2>
+<div class="parent-box">
+  <div class="box red" data-color="red"></div>
+  <div class="box green" data-color="green"></div>
+  <div class="box black" data-color="black"></div>
+</div>
+<h2 class="ex">Example</h2>
+<input type="text" class="input-show">
+<button class="btn-show">Show me</button>
+<button class="btn-clear">Clear me</button>
+<p >You wrote the text: <span class="output-show">-</span> </p>
+<h2 class="ex">Example</h2>
+<div>
+  <input type="text" id="alertInput">
+  <button id="alertButton">Hide</button>
+</div>
+<h2 class="ex">Example</h2>
+<div id="box"></div>
+<button id="decrease">Decrease</button>
+<button id="increase">Increase</button>
+<h2 class="ex">Example</h2>
+<ul class="list">
+  <li class="list-item">2</li>
+  <li class="list-item">3</li>
+  <li class="list-item">4</li>
+  <li class="list-item">5</li>
+  <li class="list-item">6</li>
+  <li class="list-item">7</li>
+</ul>
+<button id="double">Double</button>
+<h2 class="ex">Example</h2>
+<form class="checkboxForm">
+<div class="checkboxWrapper"><label for="chekcbox1">Item 1</label><input type="checkbox" id="chekcbox1"></div>
+<div class="checkboxWrapper"><label for="chekcbox2">Item 2</label><input type="checkbox" id="chekcbox2"></div>
+<div class="checkboxWrapper"><label for="chekcbox3">Item 3</label><input type="checkbox" id="chekcbox3"></div>
+<div class="checkboxWrapper"><label for="chekcbox4">Item 4</label><input type="checkbox" id="chekcbox4"></div>
+<div class="checkboxWrapper"><label for="chekcbox5">Item 5</label><input type="checkbox" id="chekcbox5"></div>
+<button type="submit">Filter</button>
+</form>
+<!-- <input type="checkbox" id="test"> -->
+<h2 class="ex">Example</h2>
+<input type="text" class="contactsFilter">
+<ul class="contactsList">
+  <li class="contact">Peter Parker</li>
+  <li class="contact">Lisa Simpson</li>
+  <li class="contact">Tom Ford</li>
+  <li class="contact">Amira Civic</li>
+  <li class="contact">Lue Garp</li>
+  <li class="contact">Kira Night</li>
+</ul>
+<h2 class="ex">Example</h2>
+<form id="searchForm">
+  <input type="text" name="searchInputByTitle" placeholder="Enter a search word">
+  <button type="submit">Search the film</button>
+</form>
+<ul id="moviesList"></ul>
+<h2 class="ex">Example</h2>
+<form class="feedback-form9">
+  <label>
+    <b>Name</b>
+    <input type="text" name="name" placeholder="Enter your name" value="Anonymous">
+  </label>
+<label>
+  <b>Message</b>
+  <textarea name="message" rows="6"></textarea>
+</label>
+<button type="submit">Submit</button>
+</form>
+<h2 class="ex">Example</h2>
+<div class="shop-wrapper" id="shop">
+
+<h2 class="ex"><a href="basket.html">Basket</a></h2>
+<h3 class="shop-title">Your beater shop</h3>
+<ul class="product-container js-list"></ul>
+</div>
 </body>
 </html>
