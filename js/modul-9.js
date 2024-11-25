@@ -64,7 +64,7 @@ const container9 = document.querySelector(".js-list");
 function createMarkup9 (arr) {
     return arr.map(({id, name, price, brand, description, year, pic}) => `
         <li class="item-card js-product" data-id="${id}">
-        <div class="shop-div-pic"><image src="${pic}" width="450" height="450" alt="${name}" ></image></div>
+        <div class="shop-div-pic">< src="${pic}" width="450" height="450" alt="${name}"/></div>
         <div class="composition-text">
         <h4>${name}</h4>
         <p>By ${brand}</p>
